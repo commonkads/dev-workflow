@@ -1,6 +1,6 @@
 {
   "name": "@commonkads/dev-workflow",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Shared workflow and developer guidance docs for Claude Code projects in the CommonKADS family",
   "scripts": {
     "postinstall": "node scripts/postinstall.js"
