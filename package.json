@@ -1,0 +1,17 @@
+{
+  "name": "@commonkads/dev-workflow",
+  "version": "1.0.0",
+  "description": "Shared workflow and developer guidance docs for Claude Code projects in the CommonKADS family",
+  "scripts": {
+    "postinstall": "node scripts/postinstall.js"
+  },
+  "files": [
+    "agents/",
+    "docs/",
+    "scripts/",
+    "skills/"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}
