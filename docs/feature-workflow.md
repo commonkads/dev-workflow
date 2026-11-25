@@ -19,6 +19,7 @@ All non-trivial features follow this 11-phase gate process. Do not advance to th
 | 8 | [Commit](#phase-8--commit) | Run checks, stage files, confirm commit message |
 | 9 | [PR](#phase-9--pr) | Draft and open the pull request |
 | 10 | [Close](#phase-10--close) | Confirm merge, switch to main, delete local feature branch |
+| 11 | [Release](#phase-11--release) | Cut a changeset, trigger the Version PR, publish to GitHub Packages |
 
 ---
 
@@ -312,5 +313,56 @@ Once merge is confirmed:
 
 > "PR #[number] is merged. I'll switch to `main` and pull the latest.
 > Can I delete the local branch `feature/<name>`?"
+
+[↑ Back to top](#feature-development-workflow)
+
+---
+
+## Phase 11 — Release
+
+**Only applies to packages published to GitHub Packages.** Skip this phase for apps, services, or packages that are not published.
+
+Releasing uses [Changesets](https://github.com/changesets/changesets). The flow is a two-merge process: the first merge creates a Version PR (bumps the version and updates `CHANGELOG.md`); merging that PR triggers the actual publish.
+
+### Step 1 — Add a changeset
+
+On `main` (after Phase 10), run:
+
+```sh
+npx changeset
+```
+
+This prompts for:
+- **Bump type** — `patch` (bug fix), `minor` (new feature, backwards-compatible), or `major` (breaking change)
+- **Summary** — a one-line description of what changed, written for consumers of the package
+
+A file is created under `.changeset/` (e.g. `.changeset/fuzzy-lions-dance.md`). Commit and push it:
+
+```sh
+git add .changeset/
+git commit -m "chore: add changeset for <feature-name>"
+git push
+```
+
+### Step 2 — Merge the Version PR
+
+The release workflow detects the new changeset file and opens a pull request titled **"chore: version packages"**. This PR:
+- Bumps the version in `package.json` according to the changeset bump type
+- Updates `CHANGELOG.md` with the changeset summary
+- Deletes the consumed changeset file
+
+Review the PR, then merge it.
+
+### Step 3 — Package is published
+
+Merging the Version PR triggers the release workflow again. This time there are no pending changeset files, so the workflow runs `changeset publish`, which publishes the new version to GitHub Packages.
+
+Confirm the publish succeeded by checking the Actions run or running:
+
+```sh
+npm view @commonkads/<package-name> version --registry https://npm.pkg.github.com
+```
+
+> "Changeset added for [feature]. Version PR will open shortly — merge it to publish."
 
 [↑ Back to top](#feature-development-workflow)
