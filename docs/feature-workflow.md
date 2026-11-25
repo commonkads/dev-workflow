@@ -321,7 +321,9 @@ When the feature PR merged to `main` (Phase 9), the release workflow detected th
 - Updates `CHANGELOG.md` with the changeset summary
 - Deletes the consumed changeset file
 
-Merge that PR. The release workflow runs once more, finds no pending changeset files, and publishes the new version to GitHub Packages.
+Present the Version PR URL to the user and ask them to merge it. Do not merge it yourself.
+
+Once the user confirms the merge, the release workflow runs once more, finds no pending changeset files, and publishes the new version to GitHub Packages.
 
 Confirm the publish succeeded by checking the Actions run or running:
 
@@ -329,7 +331,8 @@ Confirm the publish succeeded by checking the Actions run or running:
 npm view @commonkads/<package-name> version --registry https://npm.pkg.github.com
 ```
 
-> "Version PR is open — merge it to publish @commonkads/<package-name>@[version]."
+> "The Version PR is ready: [PR URL]
+> Please merge it when ready — merging will trigger the publish to GitHub Packages."
 
 [↑ Back to top](#feature-development-workflow)
 
