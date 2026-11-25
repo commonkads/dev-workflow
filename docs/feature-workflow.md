@@ -18,8 +18,8 @@ All non-trivial features follow this 11-phase gate process. Do not advance to th
 | 7 | [Log Changes](#phase-7--log-changes) | Produce change log from the completed diff |
 | 8 | [Commit](#phase-8--commit) | Run checks, stage files, confirm commit message |
 | 9 | [PR](#phase-9--pr) | Draft and open the pull request |
-| 10 | [Close](#phase-10--close) | Confirm merge, switch to main, delete local feature branch |
-| 11 | [Release](#phase-11--release) | Cut a changeset, trigger the Version PR, publish to GitHub Packages |
+| 10 | [Release](#phase-10--release) | Merge the Version PR and publish to GitHub Packages (published packages only) |
+| 11 | [Close](#phase-11--close) | Confirm merge, switch to main, delete local feature branch |
 
 ---
 
@@ -312,23 +312,7 @@ After the PR is opened:
 
 ---
 
-## Phase 10 — Close
-
-Before doing anything, confirm the PR has been merged. Check with `gh pr view <number> --json mergedAt,state` and stop if it has not been merged yet.
-
-Once merge is confirmed:
-
-1. Check out the main branch: `git checkout main && git pull`
-2. Confirm the local feature branch to delete, then ask the user before deleting it: `git branch -d feature/<name>`
-
-> "PR #[number] is merged. I'll switch to `main` and pull the latest.
-> Can I delete the local branch `feature/<name>`?"
-
-[↑ Back to top](#feature-development-workflow)
-
----
-
-## Phase 11 — Release
+## Phase 10 — Release
 
 **Only applies to packages published to GitHub Packages.** Skip this phase for apps, services, or packages that are not published. If no changeset was added in Phase 7, there is nothing to release.
 
@@ -346,5 +330,21 @@ npm view @commonkads/<package-name> version --registry https://npm.pkg.github.co
 ```
 
 > "Version PR is open — merge it to publish @commonkads/<package-name>@[version]."
+
+[↑ Back to top](#feature-development-workflow)
+
+---
+
+## Phase 11 — Close
+
+Before doing anything, confirm the feature PR has been merged. Check with `gh pr view <number> --json mergedAt,state` and stop if it has not been merged yet.
+
+Once merge is confirmed:
+
+1. Check out the main branch: `git checkout main && git pull`
+2. Confirm the local feature branch to delete, then ask the user before deleting it: `git branch -d feature/<name>`
+
+> "PR #[number] is merged. I'll switch to `main` and pull the latest.
+> Can I delete the local branch `feature/<name>`?"
 
 [↑ Back to top](#feature-development-workflow)
