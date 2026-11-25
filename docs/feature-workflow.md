@@ -228,6 +228,16 @@ Also update the living system docs at `docs/specs/`:
 - **`requirements.md`** — add or extend sections to reflect new endpoints, UI behaviour, or constraints introduced by the feature; do not duplicate the feature's own `02-requirements.md`, just integrate the net-new facts into the existing document structure
 - **`design.md`** — add or extend sections to reflect new files, components, data flows, or architectural decisions; keep the same level of detail as the surrounding prose
 
+### Changeset (published packages only)
+
+If the project is published to GitHub Packages, run `npx changeset` and commit the generated file (`.changeset/<slug>.md`) alongside the other changes in this phase. The changeset prompts for:
+- **Bump type** — `patch` (bug fix), `minor` (new feature, backwards-compatible), or `major` (breaking change)
+- **Summary** — one line written for consumers of the package
+
+Skip this if the project is not a published package.
+
+### CHANGELOG
+
 Also update `CHANGELOG.md` in the project root:
 - Determine the next version number (increment minor for new features, patch for fixes)
 - Prepend a new version entry in reverse-chronological order with the format `## [x.y.z] — YYYY-MM-DD`
@@ -320,42 +330,14 @@ Once merge is confirmed:
 
 ## Phase 11 — Release
 
-**Only applies to packages published to GitHub Packages.** Skip this phase for apps, services, or packages that are not published.
+**Only applies to packages published to GitHub Packages.** Skip this phase for apps, services, or packages that are not published. If no changeset was added in Phase 7, there is nothing to release.
 
-Releasing uses [Changesets](https://github.com/changesets/changesets). The flow is a two-merge process: the first merge creates a Version PR (bumps the version and updates `CHANGELOG.md`); merging that PR triggers the actual publish.
-
-### Step 1 — Add a changeset
-
-On `main` (after Phase 10), run:
-
-```sh
-npx changeset
-```
-
-This prompts for:
-- **Bump type** — `patch` (bug fix), `minor` (new feature, backwards-compatible), or `major` (breaking change)
-- **Summary** — a one-line description of what changed, written for consumers of the package
-
-A file is created under `.changeset/` (e.g. `.changeset/fuzzy-lions-dance.md`). Commit and push it:
-
-```sh
-git add .changeset/
-git commit -m "chore: add changeset for <feature-name>"
-git push
-```
-
-### Step 2 — Merge the Version PR
-
-The release workflow detects the new changeset file and opens a pull request titled **"chore: version packages"**. This PR:
+When the feature PR merged to `main` (Phase 9), the release workflow detected the changeset file and opened a pull request titled **"chore: version packages"**. That PR:
 - Bumps the version in `package.json` according to the changeset bump type
 - Updates `CHANGELOG.md` with the changeset summary
 - Deletes the consumed changeset file
 
-Review the PR, then merge it.
-
-### Step 3 — Package is published
-
-Merging the Version PR triggers the release workflow again. This time there are no pending changeset files, so the workflow runs `changeset publish`, which publishes the new version to GitHub Packages.
+Merge that PR. The release workflow runs once more, finds no pending changeset files, and publishes the new version to GitHub Packages.
 
 Confirm the publish succeeded by checking the Actions run or running:
 
@@ -363,6 +345,6 @@ Confirm the publish succeeded by checking the Actions run or running:
 npm view @commonkads/<package-name> version --registry https://npm.pkg.github.com
 ```
 
-> "Changeset added for [feature]. Version PR will open shortly — merge it to publish."
+> "Version PR is open — merge it to publish @commonkads/<package-name>@[version]."
 
 [↑ Back to top](#feature-development-workflow)
