@@ -123,7 +123,7 @@ Every public function, method, or service must have unit tests covering:
 
 ### Test quality rules
 
-- **Test behaviour, not implementation.** Assert on inputs and outputs, not on internal state or the order of private calls. A test that breaks when you rename a private method is testing the wrong thing.
+- **Test behavior, not implementation.** Assert on inputs and outputs, not on internal state or the order of private calls. A test that breaks when you rename a private method is testing the wrong thing.
 - **One logical assertion per test.** A test that checks three unrelated things hides which one broke. Split it.
 - **Independent tests.** No shared mutable state between tests. Use `beforeEach` to reset any state that must exist before each case.
 - **Descriptive names.** The test name should read as a plain-English sentence describing what is true: `'returns undefined when balance is zero'`, not `'test 1'` or `'works'`.
@@ -149,7 +149,7 @@ This applies equally to test code and production code.
 
 ## Prefer interfaces
 
-When more than one class implements the same behavioural contract, extract a named interface. Calling code — constructor parameters, function signatures, service dependencies — must accept the interface type, never the concrete class. A second implementation appearing is the signal to extract; do not wait for a third.
+When more than one class implements the same behavioral contract, extract a named interface. Calling code — constructor parameters, function signatures, service dependencies — must accept the interface type, never the concrete class. A second implementation appearing is the signal to extract; do not wait for a third.
 
 ---
 
@@ -158,7 +158,7 @@ When more than one class implements the same behavioural contract, extract a nam
 Names express *what*, not *how*. A good name makes a comment unnecessary.
 
 - Booleans read as predicates: `isRetired`, `hasBalance`, `budgetMet`
-- No abbreviations except universally recognised ones (`id`, `url`, `ctx`, `amt`)
+- No abbreviations except universally recognized ones (`id`, `url`, `ctx`, `amt`)
 - Avoid generic names: `data`, `info`, `manager`, `helper`, `utils` — name the concept instead
 
 ---

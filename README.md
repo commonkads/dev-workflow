@@ -40,5 +40,5 @@ The installed docs are plain markdown files in your `docs/` directory. They are 
 ## Publishing a new version
 
 1. Edit the source docs or `scripts/postinstall.js`.
-2. Bump the version in `package.json` (minor for new behaviour, patch for fixes).
+2. Bump the version in `package.json` (minor for new behavior, patch for fixes).
 3. Commit and push to `main` — the publish workflow triggers automatically.

@@ -23,7 +23,7 @@ There is no build step, no TypeScript, and no test suite. The entire package is 
 ## Making Changes
 
 1. Edit the relevant file(s) in `docs/` or `scripts/`.
-2. For behaviour changes (new phases, new postinstall logic): bump the **minor** version in `package.json`.
+2. For behavior changes (new phases, new postinstall logic): bump the **minor** version in `package.json`.
 3. For fixes and wording tweaks: bump the **patch** version.
 4. Commit and push to `main` — the publish workflow handles the rest.
 

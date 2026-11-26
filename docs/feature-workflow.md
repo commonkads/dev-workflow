@@ -151,7 +151,7 @@ Work task by task, marking each done as you go. No scope creep — if new work s
 
 ## Phase 6 — Review
 
-**Model: `claude-sonnet-5-5`** — use Sonnet, not Haiku. Review requires careful reasoning about edge cases, security implications, and subtle requirement gaps. Haiku is optimised for fast execution and misses nuanced issues; Opus is thorough but expensive for a task that runs once per feature. Sonnet provides the right balance of analytical depth and cost.
+**Model: `claude-sonnet-5-5`** — use Sonnet, not Haiku. Review requires careful reasoning about edge cases, security implications, and subtle requirement gaps. Haiku is optimized for fast execution and misses nuanced issues; Opus is thorough but expensive for a task that runs once per feature. Sonnet provides the right balance of analytical depth and cost.
 
 Review the diff against three lenses — requirements, security, and documentation. The review focuses on **what changed**; existing code is used only as context, not as a target.
 
@@ -177,15 +177,15 @@ Reading the feature's own design and task documents biases the review toward wha
 1. **Get the diff** — run `git diff main...HEAD` to see all changes on the feature branch.
 2. **Requirements check** — read `docs/specs/features/<feature-name>/02-requirements.md` and, if present, `docs/specs/requirements.md`. For each in-scope item, verify the changed code satisfies it. Flag any requirement that is missing or only partially met.
 3. **Security check** — scan the changed lines for common issues: injection vulnerabilities (SQL, command, path traversal), unsafe use of user-supplied input, secrets or credentials in code, broken access control, insecure defaults, missing input validation at system boundaries.
-4. **Documentation check** — verify that changed public interfaces, non-obvious logic, and new configuration options are adequately documented (types, inline comments for the *why*, updated `docs/` files if behaviour changed).
+4. **Documentation check** — verify that changed public interfaces, non-obvious logic, and new configuration options are adequately documented (types, inline comments for the *why*, updated `docs/` files if behavior changed).
 
 ### Findings format
 
-Categorise each finding as one of:
+Categorize each finding as one of:
 
 | Category | Meaning |
 |---|---|
-| `blocker` | Must be fixed before proceeding — incorrect behaviour, security risk, or unmet requirement |
+| `blocker` | Must be fixed before proceeding — incorrect behavior, security risk, or unmet requirement |
 | `advisory` | Recommended improvement — does not block the phase but should be addressed soon |
 
 For each finding, record:
@@ -225,7 +225,7 @@ Also update `README.md` in the project root:
 - Add or update bullet points in the **Features** section to reflect user-visible changes introduced by the feature; keep the same terse, benefit-focused style as the existing bullets
 
 Also update the living system docs at `docs/specs/`:
-- **`requirements.md`** — add or extend sections to reflect new endpoints, UI behaviour, or constraints introduced by the feature; do not duplicate the feature's own `02-requirements.md`, just integrate the net-new facts into the existing document structure
+- **`requirements.md`** — add or extend sections to reflect new endpoints, UI behavior, or constraints introduced by the feature; do not duplicate the feature's own `02-requirements.md`, just integrate the net-new facts into the existing document structure
 - **`design.md`** — add or extend sections to reflect new files, components, data flows, or architectural decisions; keep the same level of detail as the surrounding prose
 
 ### CHANGELOG

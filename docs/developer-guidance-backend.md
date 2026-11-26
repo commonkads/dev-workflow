@@ -25,7 +25,7 @@ Your `package.json` must define these scripts exactly:
 | After any structural change (new file, moved import, changed interface) | `npm run typecheck` |
 | Before committing | `npm run typecheck` then `npm run lint` — both must pass with zero errors |
 | Before opening a PR | `npm run build` — must complete without errors |
-| Verifying runtime behaviour | `npm run dev`, then test manually or run your test suite |
+| Verifying runtime behavior | `npm run dev`, then test manually or run your test suite |
 
 ## Type-checking test files co-located in src/
 
