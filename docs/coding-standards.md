@@ -200,3 +200,31 @@ Prefer functions that take inputs and return outputs with no side effects. Mutat
 ## File size
 
 A file exceeding ~300 lines is a signal — not a hard rule — that it has taken on more than one responsibility. Treat it as a prompt to revisit the design and consider splitting.
+
+---
+
+## Function and method size
+
+A function or method exceeding ~30 lines is a signal — not a hard rule — that it is doing more than one thing. Treat it as a prompt to extract a well-named helper or reconsider the abstraction.
+
+---
+
+## Dependency versions
+
+Never use `latest`, `*`, or an unversioned range. Always pin to a caret range (`^x.y.z`), which allows minor and patch updates while locking the major version:
+
+```json
+// correct — allows patch and minor updates, blocks major bumps
+"dependencies": {
+  "zod": "^3.22.4",
+  "express": "^4.18.2"
+}
+
+// wrong — unbounded or vague
+"dependencies": {
+  "zod": "latest",
+  "express": "*"
+}
+```
+
+Major version upgrades must be done explicitly — update the version in `package.json` and review the changelog for breaking changes before committing.
