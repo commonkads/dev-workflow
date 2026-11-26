@@ -228,14 +228,6 @@ Also update the living system docs at `docs/specs/`:
 - **`requirements.md`** — add or extend sections to reflect new endpoints, UI behaviour, or constraints introduced by the feature; do not duplicate the feature's own `02-requirements.md`, just integrate the net-new facts into the existing document structure
 - **`design.md`** — add or extend sections to reflect new files, components, data flows, or architectural decisions; keep the same level of detail as the surrounding prose
 
-### Changeset (published packages only)
-
-If the project is published to GitHub Packages, run `npx changeset` and commit the generated file (`.changeset/<slug>.md`) alongside the other changes in this phase. The changeset prompts for:
-- **Bump type** — `patch` (bug fix), `minor` (new feature, backwards-compatible), or `major` (breaking change)
-- **Summary** — one line written for consumers of the package
-
-Skip this if the project is not a published package.
-
 ### CHANGELOG
 
 Also update `CHANGELOG.md` in the project root:
@@ -314,16 +306,9 @@ After the PR is opened:
 
 ## Phase 10 — Release
 
-**Only applies to packages published to GitHub Packages.** Skip this phase for apps, services, or packages that are not published. If no changeset was added in Phase 7, there is nothing to release.
+**Only applies to packages published to GitHub Packages.** Skip this phase for apps, services, or packages that are not published.
 
-When the feature PR merged to `main` (Phase 9), the release workflow detected the changeset file and opened a pull request titled **"chore: version packages"**. That PR:
-- Bumps the version in `package.json` according to the changeset bump type
-- Updates `CHANGELOG.md` with the changeset summary
-- Deletes the consumed changeset file
-
-Present the Version PR URL to the user and ask them to merge it. Do not merge it yourself.
-
-Once the user confirms the merge, the release workflow runs once more, finds no pending changeset files, and publishes the new version to GitHub Packages.
+When the feature PR merges to `main`, the Release workflow runs automatically. It publishes the version in `package.json` to GitHub Packages — provided that version has not already been published. No manual step is required.
 
 Confirm the publish succeeded by checking the Actions run or running:
 
@@ -331,8 +316,7 @@ Confirm the publish succeeded by checking the Actions run or running:
 npm view @commonkads/<package-name> version --registry https://npm.pkg.github.com
 ```
 
-> "The Version PR is ready: [PR URL]
-> Please merge it when ready — merging will trigger the publish to GitHub Packages."
+> "Release workflow passed ✓ — `@commonkads/<package-name>@<version>` is published."
 
 [↑ Back to top](#feature-development-workflow)
 
