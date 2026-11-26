@@ -1,5 +1,7 @@
 # @commonkads/dev-workflow
 
+> **Disclaimer:** This project is an independent open-source software implementation inspired by the CommonKADS knowledge engineering methodology (Schreiber et al.). It is not affiliated with or endorsed by the original methodology authors or any third-party trademark holders.
+
 Shared workflow and developer guidance docs for Claude Code projects in the CommonKADS family. Installing this package copies a set of markdown docs into your project and patches `CLAUDE.md` so Claude knows to read them.
 
 ## What gets installed
