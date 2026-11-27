@@ -231,7 +231,8 @@ Also update the living system docs at `docs/specs/`:
 ### CHANGELOG
 
 Also update `CHANGELOG.md` in the project root:
-- Determine the next version number (increment minor for new features, patch for fixes)
+- Determine the next version number (increment minor for new features, patch for fixes) for the package
+- Bump the package to this next version.
 - Prepend a new version entry in reverse-chronological order with the format `## [x.y.z] — YYYY-MM-DD`
 - Under the entry, write a short bullet list of user-visible changes (not file names — what the user gains)
 - Add a link to the feature's `07-changes.md` for full details
